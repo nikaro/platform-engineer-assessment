@@ -64,6 +64,18 @@ clean:
 docker/build:
 	docker build -t ghcr.io/nikaro/plateform-engineer-assessment -f Dockerfile .
 
+.PHONY: part4
+## part4: Runs the part 4 of the assessment
+part4:
+	@echo "Running commands for part 4..."
+	# works on linux and macos
+	cat urls.txt | tr '[:upper:]' '[:lower:]' | sed -E 's|(https?://)?(.+\.)?([a-z0-9]+\.[a-z]+)(\.)?|\3|' | sort -u
+	# works on linux only (GNU sed)
+	cat urls.txt | sed -E 's|(https?://)?(.+\.)?([a-zA-Z0-9]+\.[a-zA-Z]+)(\.)?|\L\3|' | sort -u
+	# works on linux only and macos
+	cat urls.txt | awk '{ sub(/^https?:\/\//, ""); sub(/\.$$/, ""); print tolower($$0) }' | rev | cut -d'.' -f 1,2 | rev | sort -u
+	# ^(?:https?:\/\/)?(?:\w+\.)*(\w+\.\w+)\.?$
+
 .PHONY: help
 ## help: Print this help message
 help:
