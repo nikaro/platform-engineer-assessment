@@ -101,11 +101,11 @@ func Test_extractLinks(t *testing.T) {
 		wantErr   bool
 	}{
 		{"No links", args{&url.URL{Scheme: "http", Host: "www.example.com"}, strings.NewReader("")}, []*url.URL(nil), false},
-		{"Single link", args{&url.URL{Scheme: "http", Host: "www.example.com"}, strings.NewReader("<a href=\"http://www.example.com\">Example</a>")}, []*url.URL{&url.URL{Scheme: "http", Host: "www.example.com"}}, false},
-		{"Multiple links", args{&url.URL{Scheme: "http", Host: "www.example.com"}, strings.NewReader("<a href=\"http://www.example.com\">Example</a><a href=\"https://www.example.com\">Example</a>")}, []*url.URL{&url.URL{Scheme: "http", Host: "www.example.com"}, &url.URL{Scheme: "https", Host: "www.example.com"}}, false},
+		{"Single link", args{&url.URL{Scheme: "http", Host: "www.example.com"}, strings.NewReader("<a href=\"http://www.example.com\">Example</a>")}, []*url.URL{{Scheme: "http", Host: "www.example.com"}}, false},
+		{"Multiple links", args{&url.URL{Scheme: "http", Host: "www.example.com"}, strings.NewReader("<a href=\"http://www.example.com\">Example</a><a href=\"https://www.example.com\">Example</a>")}, []*url.URL{{Scheme: "http", Host: "www.example.com"}, {Scheme: "https", Host: "www.example.com"}}, false},
 		{"Invalid link", args{&url.URL{Scheme: "http", Host: "www.example.com"}, strings.NewReader("<a href=\"mailto:test@example.com\">Example</a>")}, []*url.URL(nil), false},
-		{"Relative link", args{&url.URL{Scheme: "http", Host: "www.example.com"}, strings.NewReader("<a href=\"/\">Example</a>")}, []*url.URL{&url.URL{Scheme: "http", Host: "www.example.com", Path: "/"}}, false},
-		{"Link with path", args{&url.URL{Scheme: "http", Host: "www.example.com", Path: "/hello"}, strings.NewReader("<a href=\"http://www.example.com/hello\">Example</a>")}, []*url.URL{&url.URL{Scheme: "http", Host: "www.example.com", Path: "/hello"}}, false},
+		{"Relative link", args{&url.URL{Scheme: "http", Host: "www.example.com"}, strings.NewReader("<a href=\"/\">Example</a>")}, []*url.URL{{Scheme: "http", Host: "www.example.com", Path: "/"}}, false},
+		{"Link with path", args{&url.URL{Scheme: "http", Host: "www.example.com", Path: "/hello"}, strings.NewReader("<a href=\"http://www.example.com/hello\">Example</a>")}, []*url.URL{{Scheme: "http", Host: "www.example.com", Path: "/hello"}}, false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
