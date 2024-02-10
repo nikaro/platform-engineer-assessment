@@ -15,7 +15,12 @@
   },
   "features": {
     "ghcr.io/nikaro/features/actionlint": {},
+    "ghcr.io/nikaro/features/dind": {},
     "ghcr.io/nikaro/features/go-devtools": {},
-    "ghcr.io/nikaro/features/pre-commit": {}
+    "ghcr.io/nikaro/features/packages": {
+      "packages": "asciinema"
+    },
+    "ghcr.io/nikaro/features/pre-commit": {},
+    "ghcr.io/nikaro/features/trivy": {}
   }
 }
