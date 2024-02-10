@@ -92,3 +92,20 @@ jobs:
           args: release --clean --release-notes _changelog.md
         env:
           GITHUB_TOKEN: ${{ github.token }}
+
+  # Ideally, you would commit the new version to the repository into the Kubernetes manifests file and let a tool like ArgoCD do the deployment
+
+  deploy:
+    name: Deploy
+    needs: release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+
+
+      # install required tools (kubectl, helm, whatever you need)
+      # authenticate against your cloud provider and/or Kubernetes cluster
+      # run `kubeclt apply [...]` or `helm install [...]` or whatever you need to do to deploy your application

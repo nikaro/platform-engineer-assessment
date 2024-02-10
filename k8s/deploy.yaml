@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=https://kubernetesjsonschema.dev/v1.14.0/deployment-apps-v1.json
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: platform-engineer-assessment
+  labels:
+    app: platform-engineer-assessment
+spec:
+  selector:
+    matchLabels:
+      app: platform-engineer-assessment
+  template:
+    metadata:
+      labels:
+        app: platform-engineer-assessment
+    spec:
+      containers:
+        - name: platform-engineer-assessment
+          # TODO: use a pinned version of the image
+          image: ghcr.io/nikaro/platform-engineer-assessment:latest
+          command:
+            - "/app/platform-engineer-assessment"
+            - "-u=https://www.google.com"
+            - "-s"
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
