@@ -24,6 +24,7 @@ import (
 var debug bool
 var output string
 var urls arrayVar
+var sleep bool
 
 // Cutsom flag type to store multiple URLs
 type arrayVar []url.URL
@@ -99,6 +100,7 @@ func main() {
 	flag.Var(&urls, "u", "HTTP URL")
 	flag.StringVar(&output, "o", "line", fmt.Sprintf("output format, could be: %s", outputFormats))
 	flag.BoolVar(&debug, "d", false, "enable debug logging")
+	flag.BoolVar(&sleep, "s", false, "sleep forever after running")
 	flag.Parse()
 
 	// Check if there are any URLs
@@ -162,5 +164,10 @@ func main() {
 			fmt.Println(err)
 			os.Exit(1)
 		}
+	}
+
+	if sleep {
+		// Do nothing, forever...
+		select {}
 	}
 }
