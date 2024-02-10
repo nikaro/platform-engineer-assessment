@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=https://goreleaser.com/static/schema.json
+
+builds:
+  - env:
+      - "CGO_ENABLED=0"
+    goos:
+      - "darwin"
+      - "linux"
+      - "windows"
+    goarch:
+      - "amd64"
+      - "arm64"
+
+dockers:
+  - image_templates:
+      - "ghcr.io/nikaro/platform-engineer-assessment:{{ .Version }}-amd64"
+    use: buildx
+    build_flag_templates:
+      - "--platform=linux/amd64"
+      - "--label=org.opencontainers.image.created={{ .Date }}"
+      - "--label=org.opencontainers.image.title={{ .ProjectName }}"
+      - "--label=org.opencontainers.image.revision={{ .FullCommit }}"
+      - "--label=org.opencontainers.image.version={{ .Version }}"
+    extra_files:
+      - "./"
+  - image_templates:
+      - "ghcr.io/nikaro/platform-engineer-assessment:{{ .Version }}-arm64"
+    use: buildx
+    goarch: arm64
+    build_flag_templates:
+      - "--platform=linux/arm64"
+      - "--label=org.opencontainers.image.created={{ .Date }}"
+      - "--label=org.opencontainers.image.title={{ .ProjectName }}"
+      - "--label=org.opencontainers.image.revision={{ .FullCommit }}"
+      - "--label=org.opencontainers.image.version={{ .Version }}"
+    extra_files:
+      - "./"
+
+docker_manifests:
+  - name_template: "ghcr.io/nikaro/platform-engineer-assessment:{{ .Version }}"
+    image_templates:
+      - "ghcr.io/nikaro/platform-engineer-assessment:{{ .Version }}-amd64"
+      - "ghcr.io/nikaro/platform-engineer-assessment:{{ .Version }}-arm64"

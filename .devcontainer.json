@@ -1,0 +1,21 @@
+{
+  "name": "platform-engineer-assessment",
+  "image": "ghcr.io/nikaro/debian-devcontainer:latest",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "EditorConfig.EditorConfig",
+        "esbenp.prettier-vscode",
+        "GitHub.copilot",
+        "github.vscode-github-actions",
+        "golang.go",
+        "redhat.vscode-yaml"
+      ]
+    }
+  },
+  "features": {
+    "ghcr.io/nikaro/features/actionlint": {},
+    "ghcr.io/nikaro/features/go-devtools": {},
+    "ghcr.io/nikaro/features/pre-commit": {}
+  }
+}
