@@ -1,3 +1,9 @@
+## 0.2.2 (2024-03-11)
+
+### Fix
+
+- **deps**: update module golang.org/x/net to v0.22.0 (#13)
+
 ## 0.2.1 (2024-03-11)
 
 ### Fix
