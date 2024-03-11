@@ -1,3 +1,9 @@
+## 0.2.1 (2024-03-11)
+
+### Fix
+
+- **deps**: update golang docker tag to v1.22.1 (#10)
+
 ## 0.2.0 (2024-02-10)
 
 ### Feat
