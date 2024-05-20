@@ -42,7 +42,7 @@ repos:
           - yaml
 
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v3.25.0
+    rev: v3.26.0
     hooks:
       - id: commitizen
 
