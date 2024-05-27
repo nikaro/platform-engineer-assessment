@@ -16,7 +16,7 @@ on:
 
 env:
   # renovate: datasource=pypi depName=commitizen
-  COMMITIZEN_VERSION: 3.26.0
+  COMMITIZEN_VERSION: 3.27.0
 
 jobs:
   ci:
